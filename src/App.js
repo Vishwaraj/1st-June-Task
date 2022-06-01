@@ -6,12 +6,7 @@ function App() {
     <div>
  <MoviesHeader />
    <div className="movie-list">
-   {/* <Movie />
-   <Movie />
-   <Movie />
-   <Movie />
-   <Movie />
-   <Movie /> */}
+
 
     {moviesArr.map((movie) => {
       return(<Movie name={movie.name} image={movie.image} rating={movie.rating} description={movie.description} />);
