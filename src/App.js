@@ -1,22 +1,31 @@
+import {useState} from 'react';
 
 import './App.css';
+import { Counter } from './Counter';
+import { Movie } from './Movie';
+import { MoviesHeader } from './MoviesHeader';
 
 function App() {
+
+const [movie, setMovie] = useState(moviesArr);
+
+
   return (
     <div>
  <MoviesHeader />
+ <AddMovie movie={movie} setMovie={setMovie} />
+ 
    <div className="movie-list">
-   {/* <Movie />
-   <Movie />
-   <Movie />
-   <Movie />
-   <Movie />
-   <Movie /> */}
-
-    {moviesArr.map((movie) => {
-      return(<Movie name={movie.name} image={movie.image} rating={movie.rating} description={movie.description} />);
-    })}
-
+  
+  {  movie.map((movie) => {
+    return(
+      <div>
+      <Movie name={movie.name} image={movie.image} rating={movie.rating} description={movie.description} />
+      <Counter />
+      </div>
+    );
+  })}
+    
    </div>
     </div>
    
@@ -24,14 +33,6 @@ function App() {
 }
 
 export default App;
-
-function MoviesHeader() {
-  return (
-    <div className="movies-header">
-      <h1>MoviesDB</h1>
-    </div>
-  )
-}
 
 let moviesArr = [
  
@@ -75,18 +76,75 @@ let moviesArr = [
 ];
 
 
+// add movies function 
 
-function Movie(props) {
-  return (
-    <div className='movie-card'>
-    <img alt='some-movie' src={props.image}></img>
-    
-    <div className='title-rating'>
-    <h3>{props.name}</h3>
-    <p>⭐{props.rating}</p>
+function AddMovie({movie, setMovie}) {
+
+  const [movieName, setMovieName] = useState('');
+  const [image, setImage] = useState('');
+  const [summary, setSummary] = useState('');
+  const [rating, setRating] = useState(0);
+
+  return(
+    <div className='search-area'>
+    <form>
+    <div className="form-input">
+    <label>Name</label>
+    <input onChange={event => setMovieName(event.target.value)} type='text' />
+    </div>
+    <div className="form-input">
+    <label>Image</label>
+    <input onChange={event => setImage(event.target.value)} type='text' />
+    </div>
+    <div className="form-input">
+    <label>Summary</label>
+    <input onChange={event => setSummary(event.target.value)} type='text' />
+    </div>
+    <div className="form-input">
+    <label>Rating</label>
+    <input min={1} max={10} onChange={event => setRating(event.target.value)} type='number' />
+    </div>
+    <button onClick={(event) => {submitMovie(event,movieName, image, summary, rating, movie, setMovie)}}>Add Movie</button>
+   </form>
+   
     </div>
     
-    <p>{props.description}</p>
-    </div>
   );
 }
+
+function submitMovie(event, movieName, image, summary, rating, movie, setMovie) {
+  event.preventDefault();
+  // console.log(movieName, image, summary, rating);
+
+  let newMovie =  {
+    name: movieName,
+    image: image,
+    rating: +rating,
+    description: summary
+  }
+
+  // console.log(newMovie);
+
+  setMovie([...movie, newMovie]);
+  console.log(movie);
+
+
+}
+
+
+// Add color
+
+// function AddColor() {
+
+// const [color, setColor] = useState('red');
+
+// const styles = {
+//   backgroundColor : color
+// }
+// return(
+//   <div>
+//     <input style={styles} onChange={(event) => setColor(event.target.value)} placeholder="Enter a color" ></input>
+//   </div>
+// )
+
+// }
