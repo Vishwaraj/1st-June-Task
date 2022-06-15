@@ -1,17 +1,38 @@
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AddMovie } from "./AddMovie";
 import "./App.css";
 import { MovieDetails } from "./MovieDetails";
 import { MovieList } from "./MovieList";
 import { MoviesHeader } from "./MoviesHeader";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import {TicTacToe} from './TicTacToe.js'
+
+
 
 function App() {
   const [movie, setMovie] = useState(moviesArr);
 
+  const [theme, setTheme] = useState('dark');
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: theme,
+    },
+  });
+
+ 
+
+
+
   return (
+
+    <ThemeProvider theme={darkTheme}>
+    <Paper elevation={0} style={{minHeight : '100vh'}}>
+
     <div>
-      <MoviesHeader />
+      <MoviesHeader theme={theme} setTheme={setTheme} />
 
       <Routes>
         <Route
@@ -23,9 +44,14 @@ function App() {
           element={<AddMovie movie={movie} setMovie={setMovie} />}
         />
         <Route path="/movies/:id" element={<MovieDetails movies={movie} />} />
+        <Route path ='/tic-tac-toe' element={<TicTacToe/>} />
       </Routes>
 
+    
     </div>
+
+    </Paper>
+    </ThemeProvider>
   );
 }
 
@@ -87,6 +113,5 @@ let moviesArr = [
     video: "https://www.youtube.com/embed/2HkjrJ6IK5E",
   },
 ];
-
 
 

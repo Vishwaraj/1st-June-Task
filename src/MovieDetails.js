@@ -1,5 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Button from '@mui/material/Button';
+
 
 //to show movie details
 export function MovieDetails({ movies }) {
@@ -33,7 +35,11 @@ export function MovieDetails({ movies }) {
         </div>
         <p id="movie-details-description">{selectedMovie.description}</p>
         {/* <button onClick={() => navigate(-1)}>Back</button> */}
-        <ArrowBackIcon color='primary' onClick={() => navigate(-1)}/>
+        <Button onClick={() => navigate(-1)} startIcon={<ArrowBackIcon/>}>
+        Back
+        </Button>
+
+        
       </div>
         
     </div>
