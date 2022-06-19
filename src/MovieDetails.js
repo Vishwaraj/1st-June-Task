@@ -1,13 +1,27 @@
 import { useParams, useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
+import { useEffect, useState } from "react";
 
 
 //to show movie details
-export function MovieDetails({ movies }) {
+export function MovieDetails() {
   const { id } = useParams();
   console.log(id);
-  const selectedMovie = movies[id];
+
+  const [selectedMovie, setSelectedMovie] = useState({});
+
+  
+  const goToMovie = () => {
+    fetch(`https://6278eaca6ac99a91065f4bbb.mockapi.io/movies/${id}`, {
+      method: "GET"
+    })
+    .then((response) => response.json())
+    .then((data) => setSelectedMovie(data));
+  }
+
+  useEffect(() => goToMovie(), []);
+
 
   const styles = {
     color: selectedMovie.rating > 8 ? "green" : "gold",
@@ -31,7 +45,7 @@ export function MovieDetails({ movies }) {
       <div className="movie-details">
         <div className='movie-rating'>
         <h2>{selectedMovie.name}</h2>
-        <p style={styles}>⭐{selectedMovie.rating}</p>
+        <p style={styles} >⭐{selectedMovie.rating}</p>
         </div>
         <p id="movie-details-description">{selectedMovie.description}</p>
         {/* <button onClick={() => navigate(-1)}>Back</button> */}

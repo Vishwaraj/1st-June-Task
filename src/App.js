@@ -8,11 +8,14 @@ import { MoviesHeader } from "./MoviesHeader";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import {TicTacToe} from './TicTacToe.js'
+import {EditMovie} from './EditMovie.js'
 
 
 
 function App() {
-  const [movie, setMovie] = useState(moviesArr);
+  // const [movie, setMovie] = useState(moviesArr);
+
+  const [movie, setMovie] = useState([]);
 
   const [theme, setTheme] = useState('dark');
 
@@ -37,14 +40,15 @@ function App() {
       <Routes>
         <Route
           path="/movies"
-          element={<MovieList movie={movie} setMovie={setMovie} />}
+          element={<MovieList setMovie={setMovie} movie={movie} deleteMovie={deleteMovie}/>}
         />
         <Route
           path="/add-movie"
           element={<AddMovie movie={movie} setMovie={setMovie} />}
         />
-        <Route path="/movies/:id" element={<MovieDetails movies={movie} />} />
+        <Route path="/movies/:id" element={<MovieDetails />} />
         <Route path ='/tic-tac-toe' element={<TicTacToe/>} />
+        <Route path='/edit-movie/:id' element={<EditMovie />} />
       </Routes>
 
     
@@ -59,6 +63,7 @@ export default App;
 
 let moviesArr = [
   {
+    id:'100',
     name: "Oldboy",
     image:
       "https://m.media-amazon.com/images/M/MV5BMTI3NTQyMzU5M15BMl5BanBnXkFtZTcwMTM2MjgyMQ@@._V1_FMjpg_UX1000_.jpg",
@@ -68,6 +73,7 @@ let moviesArr = [
     video: "https://www.youtube.com/embed/2HkjrJ6IK5E",
   },
   {
+    id:'101',
     name: "Parasite",
     image:
       "https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg",
@@ -77,6 +83,7 @@ let moviesArr = [
     video: "https://www.youtube.com/embed/SEUXfv87Wpk",
   },
   {
+    id:'102',
     name: "Memories of Murder",
     image:
       "https://m.media-amazon.com/images/M/MV5BOGViNTg4YTktYTQ2Ni00MTU0LTk2NWUtMTI4OTc1YTM0NzQ2XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg",
@@ -86,6 +93,7 @@ let moviesArr = [
     video: "https://www.youtube.com/embed/0n_HQwQU8ls",
   },
   {
+    id:'103',
     name: "Mulholland Drive",
     image:
       "https://m.media-amazon.com/images/M/MV5BYWEyYjhjZmItNDJjYy00YzZiLThmMzAtNzAyOWMyNzA3N2RiXkEyXkFqcGdeQXVyODY4MjYwMDU@._V1_.jpg",
@@ -95,6 +103,7 @@ let moviesArr = [
     video: "https://www.youtube.com/embed/2HkjrJ6IK5E",
   },
   {
+    id:'104',
     name: "The Departed",
     image:
       "https://images-na.ssl-images-amazon.com/images/S/pv-target-images/95e48af6a709c401a3d04171e704832263be6d48d10e7450a98328a7475cbe37._RI_V_TTW_.jpg",
@@ -104,6 +113,7 @@ let moviesArr = [
     video: "https://www.youtube.com/embed/2HkjrJ6IK5E",
   },
   {
+    id:'105',
     name: "Joint Security Area",
     image:
       "https://m.media-amazon.com/images/M/MV5BMTI1NDA4NTMyN15BMl5BanBnXkFtZTYwNTA2ODc5._V1_FMjpg_UX1000_.jpg",
@@ -113,5 +123,12 @@ let moviesArr = [
     video: "https://www.youtube.com/embed/2HkjrJ6IK5E",
   },
 ];
+
+function deleteMovie(id, setMovie) {
+  moviesArr = moviesArr.filter((movie) => {
+    return movie.id !== id;
+  });
+  setMovie(moviesArr);
+}
 
 

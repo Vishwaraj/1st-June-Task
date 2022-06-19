@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 
 
 export function TicTacToe() {
@@ -47,14 +49,17 @@ const [board, setBoard] = useState(initialBoard);
     if(board[a] !== null &&  board[a] === board[b] && board[b] === board[c]) {
       console.log('Winner', board[a]);
       return board[a];
+    } 
     }
-  }
+  
   return null;
- }
+
+  }
 
  const winner = decideWinner(board);
 
  const handleClick = (index) => {
+
   
      //allow updating in untouched boxes
      if(!winner && !board[index]) {
@@ -66,19 +71,40 @@ const [board, setBoard] = useState(initialBoard);
  }
 
  const handleRestart = () => {
-   if(winner) {
-    setBoard(initialBoard);
-   }
+  setBoard(initialBoard);
  }
 
+ const { width, height } = useWindowSize()
+
+ const xColors = {
+  color: (isXturn ? '#88ff88' : '#a9a9a9')  
+ }
+
+ const yColors = {
+  color: (!isXturn ? '#ffb0b0' : '#a9a9a9')
+ }
 
   return (
     <div className="board">
+    {winner ? <Confetti
+      width={width}
+      height={height}
+      /> : null}
+     
+       <div  className='players-area'>
+        <h1 style={xColors}>X's Turn</h1>
+        <h1 style={yColors}>O's Turn</h1>
+       </div>
+
+       <div className='game-board'>
        {board.map((val, index) => {
         return <GameBox onPlayerClick={() => {handleClick(index)}} key={index} val={val}/>
        })}
+       </div>
+
+      
        
-      <h2>Winner is:  {winner}</h2>
+      {winner ? <h2 style={winner === 'X' ? {color: '#88ff88'} : {color: '#ffb0b0'}} id='winner-is'>Winner is:  {winner}</h2> : null}
       <button className='restart-button' onClick={handleRestart} >Restart</button>
       </div>
   );
@@ -93,7 +119,8 @@ function GameBox({val, onPlayerClick}) {
   
 
   const differentColor = {
-    color: (val === 'O') ? 'red' : 'green'
+    color: (val === 'O') ? 'red' : 'green',
+    backgroundColor: (val === 'X' ? '#88ff88' : null) || (val === 'O' ? '#ffb0b0' : null)
   }
 
   return(

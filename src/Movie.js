@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import InfoIcon from '@mui/icons-material/Info';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -8,6 +8,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
@@ -30,6 +32,12 @@ export function Movie(props) {
 
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('Like updated', like);
+    }, [like]);
+
+
 
   return (
     <Card className='movie-card' sx={{height: 'min-content'}}>
@@ -59,7 +67,8 @@ export function Movie(props) {
       </CardContent>
     
    
-      <CardActions>
+      <CardActions> 
+      <div className='card-actions'>
       <div className="counter-like-dislike">
       
       <IconButton size='small' color='primary' className="like-dislike" onClick={() => setLike(like + 1)} >
@@ -76,6 +85,20 @@ export function Movie(props) {
 
     </div>
 
+    <div className='delete-button'>
+    <IconButton size='small' color='error' className="like-dislike" 
+    onClick={() => {props.deleteMovieApi(props.id)}} >
+      <DeleteIcon />
+      </IconButton>
+      
+      <IconButton size='small' color='primary' className="like-dislike" onClick={() => navigate(`/edit-movie/${props.id}`)}>
+      <EditIcon />
+      </IconButton>
+
+    </div>
+
+      </div>
+      
       </CardActions>
 
       
