@@ -29,7 +29,7 @@ export function MovieList({setMovie, movie , deleteMovie}) {
     <div className="movie-list">
       {movie.map((movie) => {
         return (
-          <div>
+          <div key={movie.id}>
             <Movie
               name={movie.name}
               image={movie.image}

@@ -9,6 +9,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import {TicTacToe} from './TicTacToe.js'
 import {EditMovie} from './EditMovie.js'
+import { BasicForm } from "./BasicForm";
 
 
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/movies/:id" element={<MovieDetails />} />
         <Route path ='/tic-tac-toe' element={<TicTacToe/>} />
         <Route path='/edit-movie/:id' element={<EditMovie />} />
+        <Route path='/basic-form' element={<BasicForm />}/>
       </Routes>
 
     
@@ -130,5 +132,6 @@ function deleteMovie(id, setMovie) {
   });
   setMovie(moviesArr);
 }
+
 
 
