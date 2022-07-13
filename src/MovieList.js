@@ -1,6 +1,8 @@
 import { Counter } from "./Counter";
 import { Movie } from "./Movie";
 import {useState, useEffect} from 'react';
+import {API} from './global';
+
 
 
 // function to show movies
@@ -11,14 +13,14 @@ export function MovieList({setMovie, movie , deleteMovie}) {
   // const [movie, setMovie] = useState([]);
 
   const getMovies = () => {
-    fetch('https://6278eaca6ac99a91065f4bbb.mockapi.io/movies')
+    fetch(`${API}/movies`)
     .then(response => response.json())
     .then(data => setMovie(data));
   }
   useEffect(() => getMovies, []);
 
   const deleteMovieApi = (id) => {
-    fetch(`https://6278eaca6ac99a91065f4bbb.mockapi.io/movies/${id}`, {
+    fetch(`${API}/movies/${id}`, {
       method: "DELETE"
     })
     .then(() => getMovies())

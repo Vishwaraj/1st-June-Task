@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from 'yup';
+import {API} from './global';
+
 
 
 // add movies function
@@ -57,7 +59,7 @@ export function AddMovie({ movie, setMovie }) {
     //   video: video
     // };
   
-    fetch("https://6278eaca6ac99a91065f4bbb.mockapi.io/movies", {
+    fetch(`${API}/movies`, {
       method: "POST",
        
       body: JSON.stringify(newMovie),

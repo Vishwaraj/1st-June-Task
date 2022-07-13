@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField';
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from 'yup';
+import {API} from './global';
+
 
 
 
@@ -30,7 +32,7 @@ export function EditMovie({ movie, setMovie }) {
   // ----------fetching data for the requested movie------------
 
   const goToMovie = () => {
-    fetch(`https://6278eaca6ac99a91065f4bbb.mockapi.io/movies/${id}`, {
+    fetch(`${API}/movies/${id}`, {
       method: "GET"
     })
     .then((response) => response.json())
@@ -105,8 +107,9 @@ function EditMovieForm({ selectedMovie, movie, setMovie, id}) {
             defaultValue={values.name}
             onChange={handleChange}
             onBlur={handleBlur}
+            error={touched.name && errors.name}
+            helperText={touched.name && errors.name ? errors.name : null}
           />
-        {touched.name && errors.name ? errors.name : null}
       </div>
       <div className="form-input">
 
@@ -116,6 +119,8 @@ function EditMovieForm({ selectedMovie, movie, setMovie, id}) {
           defaultValue={values.image}
           onChange={handleChange}
           onBlur={handleBlur}
+          error={touched.image && errors.image}
+            helperText={touched.image && errors.image ? errors.image : null}
           />
         {touched.image && errors.image ? errors.image : null}
       </div>
@@ -127,6 +132,8 @@ function EditMovieForm({ selectedMovie, movie, setMovie, id}) {
         defaultValue={values.description}
         onChange={handleChange}
         onBlur={handleBlur}
+        error={touched.description && errors.description}
+            helperText={touched.description && errors.description ? errors.description : null}
         />
         {touched.description && errors.description ? errors.description : null}
       </div>
@@ -140,6 +147,8 @@ function EditMovieForm({ selectedMovie, movie, setMovie, id}) {
           defaultValue={values.rating}
           onChange={handleChange}
           onBlur={handleBlur}
+          error={touched.rating && errors.rating}
+            helperText={touched.rating && errors.rating ? errors.rating : null}
           />
           {touched.rating && errors.rating ? errors.rating : null}
       </div>
@@ -152,6 +161,8 @@ function EditMovieForm({ selectedMovie, movie, setMovie, id}) {
           defaultValue={values.video}
           onChange={handleChange}
           onBlur={handleBlur}
+          error={touched.video && errors.video}
+            helperText={touched.video && errors.video ? errors.video : null}
           />
           {touched.video && errors.video ? errors.video : null}
       </div>
