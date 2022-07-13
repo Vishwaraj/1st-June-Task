@@ -37,7 +37,7 @@ export function MovieList({setMovie, movie , deleteMovie}) {
               image={movie.image}
               rating={movie.rating}
               description={movie.description}
-              id={movie.id}
+              id={movie._id}
               deleteMovieApi = {deleteMovieApi}
               setMovie={setMovie}
                />
