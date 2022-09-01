@@ -78,7 +78,7 @@ function EditMovieForm({ selectedMovie, movie, setMovie, id}) {
     setMovie
   ) => {
   
-    fetch(`https://6278eaca6ac99a91065f4bbb.mockapi.io/movies/${id}`, {
+    fetch(`${API}/movies/${id}`, {
       method: "PUT",
        
       body: JSON.stringify(editedMovie),

@@ -41,6 +41,9 @@ function App() {
       <MoviesHeader theme={theme} setTheme={setTheme} />
 
       <Routes>
+
+        <Route path="/" element={<HomeMessage />}/>
+
         <Route
           path="/movies"
           element={<MovieList setMovie={setMovie} movie={movie} deleteMovie={deleteMovie}/>}
@@ -137,4 +140,16 @@ function deleteMovie(id, setMovie) {
   setMovie(moviesArr);
 }
 
+
+function HomeMessage() {
+  return (
+    <>
+    <div className="home-message" >
+    <h1>Welcome to the Movies DB</h1> 
+      <h3>This is a showcase of great movies, enjoy your time browsing and if you wish you can add a movie or edit one.</h3>
+    </div>
+
+    </>
+  )
+}
 

@@ -45,7 +45,12 @@ function SignUpForm() {
     }
    })
    .then(response => response.json())
-   .then(data => console.log('New user created', data));
+   .then(data => console.log('New user created', data))
+   .then(() => alert('Account Created Continue to Login'))
+   .catch((error) => {
+    console.log(error);
+    alert('Account already exists! Login with credentials')
+   })
   }
 
 

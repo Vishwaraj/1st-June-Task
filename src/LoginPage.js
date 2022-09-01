@@ -52,8 +52,18 @@ function LoginForm() {
       }
     })
     .then(response => response.json())
-    .then(data => {console.log('user login',data); window.localStorage.setItem('token', data.token)})
-    .then(alert('You have logged in'))
+    .then(data => {console.log('user login',data); window.localStorage.setItem('token', data.token);
+    if(!data.token) {
+      alert('Invalid Credentials')
+    } else {
+      alert('Login Successful')
+      setTimeout(() => {
+        navigate('/movies')
+      }, 2000)
+    }
+  })
+  .catch((err) => console.log(err))
+
     
   }
 

@@ -12,24 +12,11 @@ export function MoviesHeader({theme, setTheme}) {
 
 const navigate = useNavigate();
 
-
+const token = window.localStorage.getItem('token');
 
   return (
 
     <div>
- {/* <AppBar>
-      <div className='appbar-header'>
-      <h1>MoviesDB</h1>
-      <div className='header-links'>
-      <h3><Link to='/'>Home</Link></h3>
-      <h3><Link to='/movies'>Movies</Link></h3>
-      <h3><Link to="/add-movie">Add Movies</Link></h3>
-      </div>
-      </div>
-    </AppBar>
-     */}
-
-
 
     <AppBar>
   <Toolbar>
@@ -39,9 +26,17 @@ const navigate = useNavigate();
   <Button color='inherit' onClick={() => {navigate('/add-movie')}}>Add Movies</Button>
   <Button color='inherit' onClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark')}}>{theme === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode'}</Button>
   <Button color='inherit' className='mode-button' onClick={() => {navigate('/tic-tac-toe')}} >Tic Tac Toe</Button>
+  {token 
+  ?
+  <Button color='inherit' onClick={() => {navigate('/'); userLogout()}}>Log out</Button>
+  :
+  <>
   <Button color='inherit' onClick={() => {navigate('/users/login')}}>Log in</Button>
   <Button color='inherit' onClick={() => {navigate('/users/signup')}}>Sign up</Button>
-  <Button color='inherit' onClick={() => {navigate('/'); userLogout()}}>Log out</Button>
+  </>
+  }
+
+
   </div>
 
   </Toolbar>

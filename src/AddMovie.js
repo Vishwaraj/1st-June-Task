@@ -58,6 +58,8 @@ export function AddMovie({ movie, setMovie }) {
     //   description: summary,
     //   video: video
     // };
+
+    const token = window.localStorage.getItem('token');
   
     fetch(`${API}/movies`, {
       method: "POST",
@@ -65,7 +67,8 @@ export function AddMovie({ movie, setMovie }) {
       body: JSON.stringify(newMovie),
        
       headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "x-auth-token": token
       }
   })
   .then((response) => response.json())
