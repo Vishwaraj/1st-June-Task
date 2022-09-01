@@ -305,3 +305,21 @@ a {
   flex-direction: row;
   justify-content: space-between;
 }
+
+
+/* styles for login page */
+
+.login-form-page, .sign-up-page {
+  padding-top: 8rem;
+  padding-left: 30rem;
+}
+
+.login-form-area, .sign-up-area {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.login-form-space, .sign-up-space {
+  width: 30vw;
+}

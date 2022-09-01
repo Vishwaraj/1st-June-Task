@@ -12,8 +12,14 @@ export function MovieList({setMovie, movie , deleteMovie}) {
 
   // const [movie, setMovie] = useState([]);
 
+  const generatedToken = localStorage.getItem('token');
+
   const getMovies = () => {
-    fetch(`${API}/movies`)
+    fetch(`${API}/movies`, {
+      headers: {
+        'x-auth-token': generatedToken
+      }
+    })
     .then(response => response.json())
     .then(data => setMovie(data));
   }
@@ -26,10 +32,14 @@ export function MovieList({setMovie, movie , deleteMovie}) {
     .then(() => getMovies())
   }
 
+ 
+
+  
 
   return (
+
     <div className="movie-list">
-      {movie.map((movie) => {
+    {generatedToken ? movie.map((movie) => {
         return (
           <div key={movie.id}>
             <Movie
@@ -43,7 +53,9 @@ export function MovieList({setMovie, movie , deleteMovie}) {
                />
           </div>
         );
-      })}
+      })
+      : <h1>You are not authorized, please log in or create an account.</h1>}
+
     </div>
   );
 }

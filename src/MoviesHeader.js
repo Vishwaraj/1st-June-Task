@@ -15,18 +15,9 @@ const navigate = useNavigate();
 
 
   return (
-    // <div>
-    //   <div className="movies-header">
-    //   <h1>MoviesDB</h1>
-    //   <div className='header-links'>
-    //   <h3><Link to='/'>Home</Link></h3>
-    //   <h3><Link to='/movies'>Movies</Link></h3>
-    //   <h3><Link to="add-movie">Add Movies</Link></h3>
-    //   </div>
-    // </div>
-    // </div>
+
     <div>
- <AppBar>
+ {/* <AppBar>
       <div className='appbar-header'>
       <h1>MoviesDB</h1>
       <div className='header-links'>
@@ -36,7 +27,7 @@ const navigate = useNavigate();
       </div>
       </div>
     </AppBar>
-    
+     */}
 
 
 
@@ -48,6 +39,9 @@ const navigate = useNavigate();
   <Button color='inherit' onClick={() => {navigate('/add-movie')}}>Add Movies</Button>
   <Button color='inherit' onClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark')}}>{theme === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode'}</Button>
   <Button color='inherit' className='mode-button' onClick={() => {navigate('/tic-tac-toe')}} >Tic Tac Toe</Button>
+  <Button color='inherit' onClick={() => {navigate('/users/login')}}>Log in</Button>
+  <Button color='inherit' onClick={() => {navigate('/users/signup')}}>Sign up</Button>
+  <Button color='inherit' onClick={() => {navigate('/'); userLogout()}}>Log out</Button>
   </div>
 
   </Toolbar>
@@ -55,12 +49,11 @@ const navigate = useNavigate();
   
     </div>
    
-
-
-
-  
-
-
-
   );
+}
+
+
+
+function userLogout() {
+  window.localStorage.removeItem('token');
 }

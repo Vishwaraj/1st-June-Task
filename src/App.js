@@ -10,6 +10,8 @@ import Paper from '@mui/material/Paper';
 import {TicTacToe} from './TicTacToe.js'
 import {EditMovie} from './EditMovie.js'
 import { BasicForm } from "./BasicForm";
+import { LoginPage } from "./LoginPage";
+import { SignUpPage } from "./SignUpPage";
 
 
 
@@ -51,6 +53,8 @@ function App() {
         <Route path ='/tic-tac-toe' element={<TicTacToe/>} />
         <Route path='/edit-movie/:id' element={<EditMovie />} />
         <Route path='/basic-form' element={<BasicForm />}/>
+        <Route path='/users/login' element={<LoginPage />}/>
+        <Route path='/users/signup' element={<SignUpPage />}/>
       </Routes>
 
     
@@ -132,6 +136,5 @@ function deleteMovie(id, setMovie) {
   });
   setMovie(moviesArr);
 }
-
 
 
